@@ -12,7 +12,7 @@ const Home: NextPage = () => {
       <Header />
 
       <main className="">
-        <h1>main</h1>
+        <section></section>
       </main>
     </div>
   );
