@@ -3,8 +3,10 @@ import Head from "next/head";
 import Header from "@/components/Header";
 import requests from "@/utils/requests";
 import { Movie } from "@/typings";
+import Banner from "@/components/Banner";
 
 interface Props {
+  original: Movie[];
   topRated: Movie[];
   sf: Movie[];
   action: Movie[];
@@ -12,7 +14,15 @@ interface Props {
   drama: Movie[];
   fantasy: Movie[];
 }
-const Home = ({ topRated, sf, action, comedy, drama, fantasy }: Props) => {
+const Home: NextPage<Props> = ({
+  original,
+  topRated,
+  sf,
+  action,
+  comedy,
+  drama,
+  fantasy,
+}: Props) => {
   return (
     <div className="relative h-screen bg-gradient-to-b from-[#333] to-[#141414]">
       <Head>
@@ -21,7 +31,8 @@ const Home = ({ topRated, sf, action, comedy, drama, fantasy }: Props) => {
       </Head>
       <Header />
 
-      <main className="">
+      <main>
+        <Banner original={original} />
         <section></section>
       </main>
     </div>
@@ -29,18 +40,21 @@ const Home = ({ topRated, sf, action, comedy, drama, fantasy }: Props) => {
 };
 
 export const getServerSideProps = async () => {
-  const [top, sf, action, comedy, drama, fantasy] = await Promise.all([
-    fetch(requests.top).then((res) => res.json()),
-    fetch(requests.sf).then((res) => res.json()),
-    fetch(requests.action).then((res) => res.json()),
-    fetch(requests.comedy).then((res) => res.json()),
-    fetch(requests.drama).then((res) => res.json()),
-    fetch(requests.fantasy).then((res) => res.json()),
-  ]);
+  const [original, top, sf, action, comedy, drama, fantasy] = await Promise.all(
+    [
+      fetch(requests.top).then((res) => res.json()),
+      fetch(requests.top).then((res) => res.json()),
+      fetch(requests.sf).then((res) => res.json()),
+      fetch(requests.action).then((res) => res.json()),
+      fetch(requests.comedy).then((res) => res.json()),
+      fetch(requests.drama).then((res) => res.json()),
+      fetch(requests.fantasy).then((res) => res.json()),
+    ]
+  );
 
-  console.log(top);
   return {
     props: {
+      original: original.results,
       topRated: top.results,
       sf: sf.results,
       action: action.results,
