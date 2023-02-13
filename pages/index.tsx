@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import requests from "@/utils/requests";
 import { Movie } from "@/typings";
 import Banner from "@/components/Banner";
+import Row from "@/components/Row";
 
 interface Props {
   original: Movie[];
@@ -33,7 +34,14 @@ const Home: NextPage<Props> = ({
 
       <main className="relative pl-4 pb-24 lg:space-y-24 lg:pl-16">
         <Banner original={original} />
-        <section></section>
+        <section>
+          <Row title="Top Rated" movies={topRated} />
+          <Row title="Science Fiction " movies={sf} />
+          <Row title="Action" movies={action} />
+          <Row title="Comedy" movies={comedy} />
+          <Row title="Drama" movies={drama} />
+          <Row title="Fantasy" movies={fantasy} />
+        </section>
       </main>
     </div>
   );
