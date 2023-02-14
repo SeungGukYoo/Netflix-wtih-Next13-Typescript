@@ -12,7 +12,10 @@ function Thumbnail({ movie }: Props) {
         src={`${baseUrl}/w500${movie.backdrop_path || movie.poster_path}`}
         alt={`${movie.title}`}
         fill
-        priority
+        blurDataURL={`${baseUrl}/w500${
+          movie.backdrop_path || movie.poster_path
+        }`}
+        placeholder="blur"
         sizes="(max-width: 768px) 100vw,
               (max-width: 1200px) 50vw,
               33vw"
