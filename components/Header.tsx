@@ -17,7 +17,7 @@ function Header() {
         scrolled && "bg-[#141414]"
       } transition-colors duration-[.5s]`}
     >
-      <div className="flex item-center space-x-2 md:space-x-10">
+      <div className="flex items-center space-x-2 md:space-x-10">
         <img
           className="cursor-pointer"
           src="https://rb.gy/ulxxee"
@@ -33,7 +33,7 @@ function Header() {
           <li className="headerLink">My List</li>
         </ul>
       </div>
-      <div className="flex item-center space-x-4 text-sm font-light">
+      <div className="flex items-center space-x-4 text-sm font-light">
         <FaBell className="w-6" />
         <p className="hidden lg:inline"> Kids</p>
         <FaSearch className="w-6" />
