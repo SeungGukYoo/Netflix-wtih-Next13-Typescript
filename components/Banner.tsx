@@ -27,6 +27,7 @@ function Banner({ original }: Props) {
           quality={50}
           className="object-cover"
         />
+        <div className="absolute top-0 left-0 z-5 w-full h-full bg-gradient1"></div>
       </div>
       <h1 className="relative z-10 text-2xl font-bold drop-shadow md:text-4xl lg:text-7xl">
         {movie?.title || movie?.name || movie?.original_title}
