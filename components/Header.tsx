@@ -1,8 +1,9 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { FaBell, FaSearch } from "react-icons/fa";
-import Link from "next/link";
+import useAuth from "@/hooks/useAuth";
 function Header() {
   const [scrolled, setScrolled] = useState(false);
+  const { logout } = useAuth();
   const handleScroll = useCallback(() => {
     window.scrollY > 0 ? setScrolled(true) : setScrolled(false);
   }, []);
@@ -37,9 +38,13 @@ function Header() {
         <FaBell className="w-6" />
         <p className="hidden lg:inline"> Kids</p>
         <FaSearch className="w-6" />
-        <Link href="/">
-          <img src="https://rb.gy/g1pwyx" alt="profile" className="rounded" />
-        </Link>
+
+        <img
+          src="https://rb.gy/g1pwyx"
+          alt="profile"
+          className="rounded cursor-pointer"
+          onClick={logout}
+        />
       </div>
     </header>
   );
