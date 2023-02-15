@@ -6,6 +6,8 @@ import { Movie } from "@/typings";
 import Banner from "@/components/Banner";
 import Row from "@/components/Row";
 import Modal from "@/components/Modal";
+import { modalState } from "@/atoms/globalAtom";
+import { useRecoilValue } from "recoil";
 
 interface Props {
   original: Movie[];
@@ -25,6 +27,7 @@ const Home: NextPage<Props> = ({
   drama,
   fantasy,
 }: Props) => {
+  const showModal = useRecoilValue(modalState);
   return (
     <div className="relative h-screen bg-gradient-to-b from-[#333] to-[#141414]">
       <Head>
@@ -44,7 +47,7 @@ const Home: NextPage<Props> = ({
           <Row title="Fantasy" movies={fantasy} />
         </section>
       </main>
-      <Modal />
+      {showModal && <Modal />}
     </div>
   );
 };
