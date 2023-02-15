@@ -1,18 +1,26 @@
 import { Movie } from "@/typings";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { baseUrl } from "@/constants/movie";
 import { FaPlay, FaInfoCircle } from "react-icons/fa";
+import { useRecoilState } from "recoil";
+import { modalState, movieState } from "@/atoms/globalAtom";
 
 interface Props {
   original: Movie[];
 }
 function Banner({ original }: Props) {
   const [movie, setMovie] = useState<Movie | null>(null);
+  const [show, setShow] = useRecoilState(modalState);
+  const [currentMovie, setCurrentMovie] = useRecoilState(movieState);
   const ref = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
     setMovie(original[Math.floor(Math.random() * original.length)]);
   }, [original]);
+  const modalHandler = useCallback(() => {
+    setShow(true);
+    setCurrentMovie(movie);
+  }, [movie]);
 
   return (
     <section className="flex flex-col space-y-2 py-16 md:space-y-4 lg:h-[65vh] lg:justify-end lg:pb-12">
@@ -41,7 +49,10 @@ function Banner({ original }: Props) {
           <FaPlay className="w-4 text-black md:w-7" />
           Play
         </button>
-        <button className="bannerButton bg-[gray]/70  text-black">
+        <button
+          onClick={modalHandler}
+          className="bannerButton bg-[gray]/70 text-black"
+        >
           <FaInfoCircle className="w-5 md:w-8" />
           More Info
         </button>
