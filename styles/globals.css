@@ -23,4 +23,7 @@
     .input{
         @apply w-full rounded bg-[#333] px-5 py-3.5 placeholder-[gray] outline-none focus:bg-[#454545]
     }
+    .loadingBar{
+        @apply w-[50px] h-[50px] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 border-[4px] border-[rgb(219,0,18)] rounded-[50%] border-r-transparent border-b-transparent z-10
+    }
 }
