@@ -5,6 +5,7 @@ import requests from "@/utils/requests";
 import { Movie } from "@/typings";
 import Banner from "@/components/Banner";
 import Row from "@/components/Row";
+import Modal from "@/components/Modal";
 
 interface Props {
   original: Movie[];
@@ -43,6 +44,7 @@ const Home: NextPage<Props> = ({
           <Row title="Fantasy" movies={fantasy} />
         </section>
       </main>
+      <Modal />
     </div>
   );
 };
