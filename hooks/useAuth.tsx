@@ -109,7 +109,13 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   );
   return (
     <AuthContext.Provider value={memoedValue}>
-      {!initialLoading && children}
+      {!initialLoading ? (
+        children
+      ) : (
+        <p className="text-4xl fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+          LOADING...
+        </p>
+      )}
     </AuthContext.Provider>
   );
 };
