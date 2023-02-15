@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import useAuth from "@/hooks/useAuth";
 interface Inputs {
@@ -10,7 +10,7 @@ interface Inputs {
 function Login() {
   const [login, setLogin] = useState(false);
   const { signIn, signUp } = useAuth();
-
+  const ref = useRef<HTMLDivElement | null>(null);
   const {
     register,
     handleSubmit,
@@ -34,13 +34,11 @@ function Login() {
       <Image
         src="https://rb.gy/p2hphi"
         fill
-        sizes="(max-width: 768px) 100vw,
-              (max-width: 1200px) 50vw,
-              33vw"
-        priority={true}
         alt="login background image"
         className="-z-10 opacity-60 hidden object-cover sm:inline "
+        onLoadingComplete={() => ref.current?.remove()}
       />
+      <div className="loadingBar animate-ani-rotation" ref={ref}></div>
       <img
         src="https://rb.gy/ulxxee"
         alt="logo"

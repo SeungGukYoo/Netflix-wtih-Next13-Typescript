@@ -1,5 +1,5 @@
 import { Movie } from "@/typings";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { baseUrl } from "@/constants/movie";
 import { FaPlay, FaInfoCircle } from "react-icons/fa";
@@ -9,7 +9,7 @@ interface Props {
 }
 function Banner({ original }: Props) {
   const [movie, setMovie] = useState<Movie | null>(null);
-
+  const ref = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
     setMovie(original[Math.floor(Math.random() * original.length)]);
   }, [original]);
@@ -23,10 +23,11 @@ function Banner({ original }: Props) {
           }`}
           alt={`${movie?.title}`}
           fill
-          priority
           quality={50}
           className="object-cover"
+          onLoadingComplete={() => ref.current?.remove()}
         />
+        <div className="loadingBar animate-ani-rotation" ref={ref}></div>
         <div className="absolute top-0 left-0 z-5 w-full h-full bg-gradient1"></div>
       </div>
       <h1 className="relative z-10 text-2xl font-bold drop-shadow md:text-4xl lg:text-7xl">
